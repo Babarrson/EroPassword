@@ -296,7 +296,7 @@
     },
     "/administrators/{adminid}/arbitration" : {
       "get" : {
-        "tags" : [ "arbitration" ],
+        "tags" : [ "administrators" ],
         "summary" : "管理员根据自己的id获得需要处理的纠纷单",
         "description" : "管理员可查看自己id对应处理的售后单",
         "operationId" : "GetArbitration",
@@ -406,8 +406,8 @@
       }
     },
     "/administrators/{adminid}/arbitration/{abrid}/confirm" : {
-      "get" : {
-        "tags" : [ "arbitration" ],
+      "put" : {
+        "tags" : [ "administrators" ],
         "summary" : "管理员处理纠纷单",
         "description" : "管理员交涉后改变仲裁的状态",
         "operationId" : "PutArbitration",
@@ -442,19 +442,70 @@
             "type" : "integer"
           }
         }, {
-          "name" : "status",
-          "in" : "query",
-          "description" : "仲裁单状态",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
           "name" : "result",
           "in" : "query",
           "description" : "仲裁单结果",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aftersales" : {
+      "get" : {
+        "tags" : [ "administrators" ],
+        "summary" : "管理员查询所有的售后单信息（可根据售后类型和状态选择）",
+        "description" : "默认所有，选择按类型或者状态",
+        "operationId" : "queryAllReturnOrder",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "beginTime",
+          "in" : "query",
+          "description" : "开始时间",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "endTime",
+          "in" : "query",
+          "description" : "结束时间",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "页码",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -462,9 +513,29 @@
             "type" : "integer"
           }
         }, {
-          "name" : "time",
+          "name" : "pageSize",
           "in" : "query",
-          "description" : "仲裁单时间",
+          "description" : "每页数目",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "description" : "售后类型",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "state",
+          "in" : "query",
+          "description" : "售后状态",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -478,7 +549,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_default_3"
+                  "$ref" : "#/components/schemas/inline_response_default"
                 }
               }
             }
