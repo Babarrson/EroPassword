@@ -556,6 +556,47 @@
           }
         }
       }
+    },
+    "/aftersales/{id}" : {
+      "get" : {
+        "tags" : [ "administrators" ],
+        "summary" : "管理员查询所有的售后单信息（可根据售后类型和状态选择）",
+        "description" : "默认所有，选择按类型或者状态",
+        "operationId" : "getAftersaleOrderByIdAdmin",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "售后单id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default_1"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
