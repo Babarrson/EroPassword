@@ -1,0 +1,780 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "售后模块2-11小组API",
+    "description" : "The API for the AfterSale",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/Aftersale-2-11/AfterSale/1.0.0",
+    "description" : "售后模块2-11小组API"
+  }, {
+    "url" : "https://virtserver.swaggerhub.com/Aftersale-2-11/Shop/1.0.0",
+    "description" : "售后模块2-11小组API"
+  } ],
+  "paths" : {
+    "/shops/{id}/aftersales/" : {
+      "get" : {
+        "tags" : [ "Shop" ],
+        "summary" : "商家查看所有售后单",
+        "description" : "商家查看所有售后单（可根据售后类型，申请原因，售后状态，订单id，售后订单id选择)",
+        "operationId" : "getAfterSale",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "商家id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "description" : "售后类型",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "reason",
+          "in" : "query",
+          "description" : "申请原因",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "售后状态",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "afterSaleId",
+          "in" : "query",
+          "description" : "售后订单id",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "OrderItemId",
+          "in" : "query",
+          "description" : "订单明细id",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "页码",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "每页数目",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops/{shopId}/aftersales/{id}" : {
+      "get" : {
+        "tags" : [ "Shop" ],
+        "summary" : "商家根据售后单id查询售后单信息",
+        "operationId" : "getAftersaleOrderById",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "shopId",
+          "in" : "path",
+          "description" : "店铺id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "售后单id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops/{shopId}/aftersales/{id}/confirm" : {
+      "put" : {
+        "tags" : [ "Shop" ],
+        "summary" : "商家同意/不同意（退款，换货，维修）",
+        "operationId" : "confirmAftersales",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "shopId",
+          "in" : "path",
+          "description" : "店铺id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "售后单id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "body",
+          "in" : "query",
+          "description" : "处理意见",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/body"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops/{shopId}/aftersales/{id}/receive" : {
+      "put" : {
+        "tags" : [ "Shop" ],
+        "summary" : "商家确认收到买家的退（换）货",
+        "operationId" : "shopConfirmReceive",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "shopId",
+          "in" : "path",
+          "description" : "店铺id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "售后单id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "body",
+          "in" : "query",
+          "description" : "处理意见",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/body_1"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/administrators/{adminid}/arbitration" : {
+      "get" : {
+        "tags" : [ "arbitration" ],
+        "summary" : "管理员根据自己的id获得需要处理的纠纷单",
+        "description" : "管理员可查看自己id对应处理的售后单",
+        "operationId" : "GetArbitration",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "adminid",
+          "in" : "path",
+          "description" : "管理员id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "beginTime",
+          "in" : "query",
+          "description" : "开始时间",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "endTime",
+          "in" : "query",
+          "description" : "结束时间",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "页码",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "每页数目",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "仲裁单状态",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "result",
+          "in" : "query",
+          "description" : "仲裁单结果",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "time",
+          "in" : "query",
+          "description" : "仲裁单时间",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/administrators/{adminid}/arbitration/{abrid}/confirm" : {
+      "get" : {
+        "tags" : [ "arbitration" ],
+        "summary" : "管理员处理纠纷单",
+        "description" : "管理员交涉后改变仲裁的状态",
+        "operationId" : "PutArbitration",
+        "parameters" : [ {
+          "name" : "authorization",
+          "in" : "header",
+          "description" : "用户token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "adminid",
+          "in" : "path",
+          "description" : "管理员id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "abrid",
+          "in" : "path",
+          "description" : "仲裁单id",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "仲裁单状态",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "result",
+          "in" : "query",
+          "description" : "仲裁单结果",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "time",
+          "in" : "query",
+          "description" : "仲裁单时间",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_default_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "SimpleAftersale" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "orderItemId" : {
+            "type" : "integer"
+          },
+          "customerId" : {
+            "type" : "integer"
+          },
+          "shopId" : {
+            "type" : "string"
+          },
+          "aftersaleSn" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "integer",
+            "description" : "0换货，1退货，2维修"
+          },
+          "reason" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "from_order_id" : {
+            "type" : "integer",
+            "description" : "起因订单id"
+          }
+        },
+        "description" : "售后服务"
+      },
+      "Aftersale" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "orderItemId" : {
+            "type" : "integer",
+            "description" : "产生售后单的订单明细id"
+          },
+          "aftersaleSn" : {
+            "type" : "integer",
+            "description" : "售后单序号"
+          },
+          "customerId" : {
+            "type" : "integer"
+          },
+          "shopId" : {
+            "type" : "integer"
+          },
+          "type" : {
+            "type" : "integer",
+            "description" : "0换货，1退货, 2维修"
+          },
+          "reason" : {
+            "type" : "string"
+          },
+          "conclusion" : {
+            "type" : "string",
+            "description" : "处理意见"
+          },
+          "refund" : {
+            "type" : "integer",
+            "description" : "退款金额"
+          },
+          "quantity" : {
+            "type" : "integer",
+            "description" : "货物数量"
+          },
+          "regionId" : {
+            "type" : "integer"
+          },
+          "address" : {
+            "type" : "string",
+            "description" : "取货地址"
+          },
+          "contact" : {
+            "type" : "string",
+            "description" : "联系人"
+          },
+          "mobile" : {
+            "type" : "string"
+          },
+          "packageId" : {
+            "type" : "integer",
+            "description" : "售后物流id"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "beArbitated" : {
+            "type" : "integer",
+            "description" : "是否仲裁中"
+          },
+          "refundId" : {
+            "type" : "integer",
+            "description" : "退款id"
+          },
+          "from_order_id" : {
+            "type" : "integer",
+            "description" : "起因订单id"
+          },
+          "change_order_id" : {
+            "type" : "integer",
+            "description" : "换货订单"
+          },
+          "pay_order_id" : {
+            "type" : "integer",
+            "description" : "支付订单"
+          }
+        },
+        "description" : "售后服务"
+      },
+      "Arbitration" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "仲裁id"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "仲裁状态"
+          },
+          "result" : {
+            "type" : "integer",
+            "description" : "仲裁结果"
+          },
+          "after_id" : {
+            "type" : "integer",
+            "description" : "售后单id"
+          },
+          "arbitrator_id" : {
+            "type" : "integer",
+            "description" : "仲裁员id"
+          },
+          "arbitrator_name" : {
+            "type" : "string",
+            "description" : "仲裁员name"
+          },
+          "arbitration_date" : {
+            "type" : "integer",
+            "description" : "仲裁日期"
+          }
+        }
+      },
+      "inline_response_default" : {
+        "type" : "object",
+        "properties" : {
+          "errno" : {
+            "type" : "integer"
+          },
+          "errmsg" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_default_data"
+          }
+        }
+      },
+      "inline_response_default_1" : {
+        "type" : "object",
+        "properties" : {
+          "errno" : {
+            "type" : "object"
+          },
+          "errmsg" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/Aftersale"
+          }
+        }
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "confirm" : {
+            "type" : "boolean"
+          },
+          "price" : {
+            "type" : "integer",
+            "description" : "支付金额"
+          },
+          "conclusion" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "integer",
+            "description" : "修改类型，0换货，1退货, 2维修"
+          }
+        }
+      },
+      "inline_response_default_2" : {
+        "type" : "object",
+        "properties" : {
+          "errno" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "errmsg" : {
+            "type" : "string",
+            "example" : "成功"
+          }
+        }
+      },
+      "body_1" : {
+        "properties" : {
+          "confirm" : {
+            "type" : "boolean"
+          },
+          "conclusion" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_default_3" : {
+        "type" : "object",
+        "properties" : {
+          "errno" : {
+            "type" : "integer"
+          },
+          "errmsg" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_default_3_data"
+          }
+        }
+      },
+      "inline_response_default_data" : {
+        "type" : "object",
+        "properties" : {
+          "page" : {
+            "type" : "integer",
+            "description" : "页码"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页数目"
+          },
+          "total" : {
+            "type" : "integer",
+            "description" : "总数"
+          },
+          "pages" : {
+            "type" : "integer",
+            "description" : "总页数"
+          },
+          "list" : {
+            "$ref" : "#/components/schemas/SimpleAftersale"
+          }
+        }
+      },
+      "inline_response_default_3_data" : {
+        "type" : "object",
+        "properties" : {
+          "page" : {
+            "type" : "integer",
+            "description" : "页码"
+          },
+          "pageSize" : {
+            "type" : "integer",
+            "description" : "每页数目"
+          },
+          "total" : {
+            "type" : "integer",
+            "description" : "总数"
+          },
+          "pages" : {
+            "type" : "integer",
+            "description" : "总页数"
+          },
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Arbitration"
+            }
+          }
+        }
+      }
+    }
+  }
+}
